@@ -1764,6 +1764,19 @@ Example:
 Misc
 ====
 
+ACTION
+-------
+
+Match ``^:(?P<mask>\S+!\S+@\S+) (?P<event>(PRIVMSG|NOTICE)) (?P<target>\S+) :\s*(\x01)*ACTION\s*(?P<data>\S+[^\x01]*)(\x01)*$``
+
+Example:
+
+.. code-block:: python
+
+    @irc3.event(rfc.ACTION)
+    def myevent(bot):
+        # do something
+
 CONNECTED
 ---------
 
