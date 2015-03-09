@@ -238,16 +238,6 @@ class Commands(dict):
 
     @irc3.event((r':(?P<mask>\S+) PRIVMSG (?P<target>\S+) '
                  r':({re_cmd})?(?P<cmd>\w+)(\s(?P<data>\S.*)|$)'))
-    def on_private_command(self, cmd, mask=None, target=None, client=None, **kw):
-        if not target.is_channel:
-            self.on_command(cmd, mask, target, client, **kw)
-
-    @irc3.event((r':(?P<mask>\S+) PRIVMSG (?P<target>\S+) '
-                 r':{re_cmd}(?P<cmd>\w+)(\s(?P<data>\S.*)|$)'))
-    def on_public_command(self, cmd, mask=None, target=None, client=None, **kw):
-        if target.is_channel:
-            self.on_command(cmd, mask, target, client, **kw)
-
     def on_command(self, cmd, mask=None, target=None, client=None, **kw):
         predicates, meth = self.get(cmd, (None, None))
         if meth is not None:
