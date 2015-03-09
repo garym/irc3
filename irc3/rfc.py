@@ -64,6 +64,11 @@ PRIVMSG = raw.new(
     (r'^:(?P<mask>\S+!\S+@\S+) (?P<event>(PRIVMSG|NOTICE)) '
      r'(?P<target>\S+) :\s*(?P<data>\S+.*)$'))
 
+ACTION = raw.new(
+    'ACTION',
+    (r'^:(?P<mask>\S+!\S+@\S+) (?P<event>(PRIVMSG|NOTICE)) '
+     r'(?P<target>\S+) :\s*(\x01)*ACTION\s*(?P<data>\S+[^\x01]*)(\x01)*$'))
+
 CTCP = raw.new(
     'CTCP',
     ('^:(?P<mask>\S+!\S+@\S+) (?P<event>(PRIVMSG|NOTICE)) '
